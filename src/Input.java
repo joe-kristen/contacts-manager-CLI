@@ -41,7 +41,7 @@ public class Input {
 //    }
 
 
-    public int getInt(int min, int max){
+    public int getInt(int min, int max, String prompt){
         Boolean userContinue = true;
         int input;
         do {
@@ -50,7 +50,7 @@ public class Input {
             input = scanner.nextInt();
             if (input > max || input < min) {
                 System.out.println("This is not a valid number");
-            }   else if(input <= max || input >= min){
+            }   else if(input >= max || input <= min){
                 userContinue = false;
             }
         }while(userContinue);
