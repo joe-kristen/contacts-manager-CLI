@@ -59,7 +59,7 @@ public class Contacts extends Input {
          for (int i = 0; i < contactsReader.getFileLines().size(); i++) {
              System.out.println(contactsReader.getFileLines().get(i));
          }
-         contactsMenu();
+//         contactsMenu();
     }
 
 //    public ArrayList<String> asList(Contact contact){
@@ -106,6 +106,7 @@ public class Contacts extends Input {
     public void deleteContact() throws IOException {
         List<String> contactFileContents = Files.readAllLines(filepath);
         List<String> newList = new ArrayList<>();
+        showAllContacts();
 
         String contact = userInput.getString("Type in the name of the contact you'd like to delete:");
 
@@ -117,7 +118,6 @@ public class Contacts extends Input {
             newList.add(contactInfo);
         }
         Files.write(filepath, newList);
-        showAllContacts();
     }
 
 }
