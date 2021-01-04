@@ -31,65 +31,42 @@ public class Contacts extends Input {
 
 
     public void contactCLIChoices() throws Exception {
-        int userSelection = contactsMenu();
-        // insert a do-while for starting with a yesNo
-        switch(userSelection) {
-            case 1:
-                showAllContacts();
-                break;
-            case 2:
-                addContact();
-                break;
-            case 3:
-                System.out.println("This will be the edit function.");
-                break;
-            case 4:
-                deleteContact();
-                contactsReader.writeToLog("Delete function accessed.");
-                break;
-            case 5:
-                System.out.println("Exit");
-                break;
-            default:
-                System.out.println("Try selecting a different number.");
-        }
+        Boolean userContinue = true;
+
+        do{
+            int userSelection = contactsMenu();
+            switch(userSelection) {
+                case 1:
+                    showAllContacts();
+                    break;
+                case 2:
+                    addContact();
+                    break;
+                case 3:
+                    editContact();
+                    break;
+                case 4:
+                    deleteContact();
+                    break;
+                case 5:
+                    System.out.println("Exit");
+                    userContinue = false;
+                    break;
+                default:
+                    System.out.println("Try selecting a different number.");
+            }
+            if(userContinue){
+                System.out.println();
+                userContinue = yesNo("Would you like to continue? (Y/N)");
+            }
+        }   while(userContinue);
     }
     // display all contacts
     public void showAllContacts() throws IOException {
          for (int i = 0; i < contactsReader.getFileLines().size(); i++) {
              System.out.println(contactsReader.getFileLines().get(i));
          }
-//         contactsMenu();
     }
-
-//    public ArrayList<String> asList(Contact contact){
-//        ArrayList<String> newList = new ArrayList<String>();
-//        newList.add(contact.getName());
-//        newList.add(contact.getPhoneNumber());
-//        return newList;
-//    }
-
-
-
-    // add a contact
-//    public void addContact() {
-//        String name = userInput.getString("Please enter a name:");
-//        System.out.println();
-//        String phoneNumber = userInput.getString("Please enter a phone number:");
-//        System.out.println();
-//        Contact newContact = new Contact(name, phoneNumber);
-////        Files.write(filepath, newContact, StandardOpenOption.APPEND);
-//        try{
-//            Files.write(
-//                    filepath,
-//                    asList(newContact),
-//                    StandardOpenOption.APPEND
-//
-//            );
-//        }   catch(Exception E){
-//            System.out.println("Invalid");
-//        }
-//    }
 
 
     public void addContact() throws IOException {
@@ -97,9 +74,35 @@ public class Contacts extends Input {
         String phoneNumber = userInput.getString("Please enter a phone number:");
         Files.write(filepath, Arrays.asList(name + " " + phoneNumber + "\n"), StandardOpenOption.APPEND);
         System.out.println("You have successfully added: " + name + " " + phoneNumber);
+        contactsReader.writeToLog("Added new contact " + name);
     }
 
-    public void editContact() {
+    public void editContact() throws IOException {
+        List<String> contactFileContents = Files.readAllLines(filepath);
+        List<String> newList = new ArrayList<>();
+        showAllContacts();
+
+        String contact = userInput.getString("Type in the name of the contact you'd like to edit:");
+        String name = contact;
+
+        for (String contactInfo : contactFileContents) {
+            if(contactInfo.contains(contact)) {
+                name = userInput.getString("Please enter a name:");
+                String phoneNumber = userInput.getString("Please enter a phone number:");
+                newList.add(name + " " + phoneNumber);
+                System.out.println("You have successfully edited: " + name + " " + phoneNumber);
+                continue;
+            }   else{
+                newList.add(contactInfo);
+            }
+
+        }
+        Files.write(filepath, newList);
+        if (name.equalsIgnoreCase(contact)) {
+            contactsReader.writeToLog("Existing contact " + name + " edited.");
+        }   else{
+            contactsReader.writeToLog("Changed name of existing contact " + contact + " to " + name);
+        }
 
     }
 
@@ -113,11 +116,14 @@ public class Contacts extends Input {
         for (String contactInfo : contactFileContents) {
             if(contactInfo.contains(contact)) {
                 newList.remove(contactInfo);
+                System.out.println("You have successfully deleted " + contact + " from the address book.");
                 continue;
             }
             newList.add(contactInfo);
         }
         Files.write(filepath, newList);
+        contactsReader.writeToLog("Contact " + contact + " deleted.");
+
     }
 
 }
