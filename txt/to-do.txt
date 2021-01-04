@@ -6,3 +6,4 @@ add
 edit
 delete
 start/exit application (boolean yesNo)
+joe test
