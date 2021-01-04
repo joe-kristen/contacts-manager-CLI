@@ -41,7 +41,7 @@ public class Contacts extends Input {
                 showAllContacts();
                 break;
             case 2:
-                System.out.println("This case is working.");
+                System.out.println("This will be the add function.");
                 break;
             default:
                 System.out.println("Try selecting a different number.");

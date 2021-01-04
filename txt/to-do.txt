@@ -1,3 +1,8 @@
-auto-complete?
+methods for:
 
-test
+menu choices
+view all entries
+add
+edit
+delete
+start/exit application (boolean yesNo)
