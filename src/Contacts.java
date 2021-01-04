@@ -63,16 +63,17 @@ public class Contacts extends Input {
     }
     // display all contacts
     public void showAllContacts() throws IOException {
-         for (int i = 0; i < contactsReader.getFileLines().size(); i++) {
-             System.out.println(contactsReader.getFileLines().get(i));
-         }
+        List<String> contacts = Files.readAllLines(filepath);
+        for (String contact : contacts) {
+            System.out.println(contact);
+        }
     }
 
 
     public void addContact() throws IOException {
         String name = userInput.getString("Please enter a name:");
         String phoneNumber = userInput.getString("Please enter a phone number:");
-        Files.write(filepath, Arrays.asList(name + " " + phoneNumber + "\n"), StandardOpenOption.APPEND);
+        Files.write(filepath, Arrays.asList(name.toUpperCase() + " " + phoneNumber.spli), StandardOpenOption.APPEND);
         System.out.println("You have successfully added: " + name + " " + phoneNumber);
         contactsReader.writeToLog("Added new contact " + name);
     }
@@ -125,5 +126,7 @@ public class Contacts extends Input {
         contactsReader.writeToLog("Contact " + contact + " deleted.");
 
     }
+
+
 
 }

@@ -100,5 +100,20 @@ public class Input {
         return Double.parseDouble(userDouble);
     }
 
+    public String formatPhoneNumber(String phoneNumber) {
+        String number;
+        if(phoneNumber.length() == 10) {
+            number = phoneNumber.replaceFirst("(\\d{3})(\\d{3})(\\d+)", "($1) $2-$3");
+            System.out.println(number);
+        } else if (phoneNumber.length() == 7) {
+            number = phoneNumber.replaceFirst("(\\d{3})(\\d+)", "$1-$2");
+            System.out.println(number);
+        } else {
+            System.out.println("Please enter a 7 or 10 digit number.");
+        }
+        return number;
+    }
+
+
 
 }

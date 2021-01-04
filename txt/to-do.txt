@@ -8,3 +8,6 @@ delete
 start/exit application (boolean yesNo)
 joe test
 joe test 2
+
+extra line in add function
+fix updated list not showing the names
