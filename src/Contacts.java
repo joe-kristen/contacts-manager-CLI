@@ -38,28 +38,24 @@ public class Contacts extends Input {
                 showAllContacts();
                 break;
             case 2:
-//                System.out.println("This will be the add function.");
                 addContact();
                 break;
-                case 3:
+            case 3:
                 System.out.println("This will be the edit function.");
                 break;
-                case 4:
-                System.out.println("This will be the remove function.");
-                addContact();
+            case 4:
+                deleteContact();
+                contactsReader.writeToLog("Delete function accessed.");
                 break;
-                case 5:
+            case 5:
                 System.out.println("Exit");
-                addContact();
                 break;
-
             default:
                 System.out.println("Try selecting a different number.");
         }
     }
     // display all contacts
     public void showAllContacts() throws IOException {
-        contactsReader.writeToLog("success1");
          for (int i = 0; i < contactsReader.getFileLines().size(); i++) {
              System.out.println(contactsReader.getFileLines().get(i));
          }
@@ -101,6 +97,27 @@ public class Contacts extends Input {
         String phoneNumber = userInput.getString("Please enter a phone number:");
         Files.write(filepath, Arrays.asList(name + " " + phoneNumber + "\n"), StandardOpenOption.APPEND);
         System.out.println("You have successfully added: " + name + " " + phoneNumber);
+    }
+
+    public void editContact() {
+
+    }
+
+    public void deleteContact() throws IOException {
+        List<String> contactFileContents = Files.readAllLines(filepath);
+        List<String> newList = new ArrayList<>();
+
+        String contact = userInput.getString("Type in the name of the contact you'd like to delete:");
+
+        for (String contactInfo : contactFileContents) {
+            if(contactInfo.contains(contact)) {
+                newList.remove(contactInfo);
+                continue;
+            }
+            newList.add(contactInfo);
+        }
+        Files.write(filepath, newList);
+        showAllContacts();
     }
 
 }
