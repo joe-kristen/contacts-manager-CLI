@@ -6,10 +6,10 @@ import java.util.List;
 public class Contact {
 
     private String name;
-    private long phoneNumber;
+    private String phoneNumber;
 
     // Constructor
-    public Contact(String name, long phoneNumber) {
+    public Contact(String name, String phoneNumber) {
         this.name = name;
         this.phoneNumber = phoneNumber;
     }
@@ -23,11 +23,11 @@ public class Contact {
         this.name = name;
     }
 
-    public long getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(long phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
