@@ -40,7 +40,7 @@ public class Input {
         boolean userContinue = true;
         int input;
         do {
-            System.out.printf("Please enter a number between %d and %d", min, max);
+            System.out.println(prompt);
             System.out.println();
             input = scanner.nextInt();
             if (input > max || input < min) {

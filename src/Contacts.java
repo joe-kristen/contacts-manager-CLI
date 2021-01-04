@@ -4,10 +4,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Contacts extends Input {
     Input userInput = new Input();
+
+    Path filepath = Paths.get("data", "contacts.txt");
 
     FileIO contactsReader = new FileIO("data", "contacts.txt", "contacts.log");
 
@@ -22,7 +25,7 @@ public class Contacts extends Input {
                 "(3) Edit a contact\n" +
                 "(4) Remove a contact\n" +
                 "(5) Exit menu\n");
-        return userInput.getInt(1,5, "Please type the number that corresponds to your choice.");
+        return userInput.getInt("Please type the number that corresponds to your choice.");
     }
 
 
@@ -35,8 +38,21 @@ public class Contacts extends Input {
                 showAllContacts();
                 break;
             case 2:
-                System.out.println("This will be the add function.");
+//                System.out.println("This will be the add function.");
+                addContact();
                 break;
+                case 3:
+                System.out.println("This will be the edit function.");
+                break;
+                case 4:
+                System.out.println("This will be the remove function.");
+                addContact();
+                break;
+                case 5:
+                System.out.println("Exit");
+                addContact();
+                break;
+
             default:
                 System.out.println("Try selecting a different number.");
         }
@@ -49,17 +65,42 @@ public class Contacts extends Input {
          }
          contactsMenu();
     }
+
+//    public ArrayList<String> asList(Contact contact){
+//        ArrayList<String> newList = new ArrayList<String>();
+//        newList.add(contact.getName());
+//        newList.add(contact.getPhoneNumber());
+//        return newList;
+//    }
+
+
+
     // add a contact
-    public void addContact() {
+//    public void addContact() {
+//        String name = userInput.getString("Please enter a name:");
+//        System.out.println();
+//        String phoneNumber = userInput.getString("Please enter a phone number:");
+//        System.out.println();
+//        Contact newContact = new Contact(name, phoneNumber);
+////        Files.write(filepath, newContact, StandardOpenOption.APPEND);
+//        try{
+//            Files.write(
+//                    filepath,
+//                    asList(newContact),
+//                    StandardOpenOption.APPEND
+//
+//            );
+//        }   catch(Exception E){
+//            System.out.println("Invalid");
+//        }
+//    }
+
+
+    public void addContact() throws IOException {
         String name = userInput.getString("Please enter a name:");
         String phoneNumber = userInput.getString("Please enter a phone number:");
-        Contact newContact = new Contact(name, phoneNumber);
-        Path filepath = Paths.get("data", "contacts.txt");
-//        Files.write(filepath, newContact, StandardOpenOption.APPEND);
-
-
-
+        Files.write(filepath, Arrays.asList(name + " " + phoneNumber + "\n"), StandardOpenOption.APPEND);
+        System.out.println("You have successfully added: " + name + " " + phoneNumber);
     }
-
 
 }
