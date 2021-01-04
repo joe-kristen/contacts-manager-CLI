@@ -1,4 +1,3 @@
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -7,7 +6,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
 import java.util.List;
 
-public class FileIO {
+public class FileIO extends ContactTest {
 
     private String directoryName;
     private String fileName;
@@ -52,11 +51,6 @@ public class FileIO {
         }
         System.out.println(filePath);
         this.fileLines = Files.readAllLines((this.filePath));
-    }
-
-    public static void main(String[] args) throws IOException {
-        FileIO contactsReader = new FileIO("data", "contacts.txt", "contacts.log");
-
     }
 
     public void writeToLog(String message) throws IOException {
