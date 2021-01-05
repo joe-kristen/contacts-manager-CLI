@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Contacts extends Input {
+
     Input userInput = new Input();
 
     Path filepath = Paths.get("data", "contacts.txt");
@@ -73,7 +74,7 @@ public class Contacts extends Input {
     public void addContact() throws IOException {
         String name = userInput.getString("Please enter a name:");
         String phoneNumber = userInput.getString("Please enter a phone number:");
-        Files.write(filepath, Arrays.asList(name.toUpperCase() + " " + phoneNumber), StandardOpenOption.APPEND);
+        Files.write(filepath, Arrays.asList(name + " " + phoneNumber), StandardOpenOption.APPEND);
         System.out.println("You have successfully added: " + name + " " + phoneNumber);
         contactsReader.writeToLog("Added new contact " + name);
     }
