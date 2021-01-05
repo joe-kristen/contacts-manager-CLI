@@ -46,7 +46,7 @@ public class Contacts extends Input {
                     deleteContact();
                     break;
                 case 5:
-                    System.out.println("Exit");
+                    System.err.println("Exiting program. Have a great day!");
                     userContinue = false;
                     break;
                 default:
