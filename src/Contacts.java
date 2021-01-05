@@ -73,7 +73,7 @@ public class Contacts extends Input {
     public void addContact() throws IOException {
         String name = userInput.getString("Please enter a name:");
         String phoneNumber = userInput.getString("Please enter a phone number:");
-        Files.write(filepath, Arrays.asList(name.toUpperCase() + " " + phoneNumber.spli), StandardOpenOption.APPEND);
+        Files.write(filepath, Arrays.asList(name.toUpperCase() + " " + phoneNumber), StandardOpenOption.APPEND);
         System.out.println("You have successfully added: " + name + " " + phoneNumber);
         contactsReader.writeToLog("Added new contact " + name);
     }
@@ -96,7 +96,6 @@ public class Contacts extends Input {
             }   else{
                 newList.add(contactInfo);
             }
-
         }
         Files.write(filepath, newList);
         if (name.equalsIgnoreCase(contact)) {
@@ -104,7 +103,6 @@ public class Contacts extends Input {
         }   else{
             contactsReader.writeToLog("Changed name of existing contact " + contact + " to " + name);
         }
-
     }
 
     public void deleteContact() throws IOException {
@@ -126,7 +124,5 @@ public class Contacts extends Input {
         contactsReader.writeToLog("Contact " + contact + " deleted.");
 
     }
-
-
 
 }

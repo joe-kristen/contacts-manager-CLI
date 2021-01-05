@@ -14,6 +14,10 @@ public class ContactTest {
         Contacts contactsCLI = new Contacts();
         contactsCLI.contactCLIChoices();
 
+
+
+
+
     }
 
 }
