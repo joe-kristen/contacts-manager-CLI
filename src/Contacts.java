@@ -10,9 +10,7 @@ import java.util.List;
 public class Contacts extends Input {
 
     Input userInput = new Input();
-
     Path filepath = Paths.get("data", "contacts.txt");
-
     FileIO contactsReader = new FileIO("data", "contacts.txt", "contacts.log");
 
     public Contacts() throws IOException {
@@ -28,8 +26,6 @@ public class Contacts extends Input {
                 "(5) Exit menu\n");
         return userInput.getInt("Please type the number that corresponds to your choice.");
     }
-
-
 
     public void contactCLIChoices() throws Exception {
         Boolean userContinue = true;
@@ -62,14 +58,13 @@ public class Contacts extends Input {
             }
         }   while(userContinue);
     }
-    // display all contacts
+
     public void showAllContacts() throws IOException {
         List<String> contacts = Files.readAllLines(filepath);
         for (String contact : contacts) {
             System.out.println(contact);
         }
     }
-
 
     public void addContact() throws IOException {
         String name = userInput.getString("Please enter a name:");
